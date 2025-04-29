@@ -1,5 +1,3 @@
-package ConcertSystem;
-
 import java.util.List;
 
 public class Admin extends User{
@@ -38,9 +36,7 @@ public class Admin extends User{
     }
 
     @Override
-    public void viewEvents() {
-        //TODO
+    public void viewEvents(List<Concert> concerts) {
+        concerts.forEach(System.out :: println);
     }
-
-
 }

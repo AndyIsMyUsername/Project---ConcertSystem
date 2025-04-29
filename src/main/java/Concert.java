@@ -1,8 +1,6 @@
-package ConcertSystem;
-
 import java.time.LocalDate;
 
-public class Concert extends Event implements Comparable<Concert> {
+public class Concert extends Event implements Bookable, Comparable<Concert> {
     private int seats;
     private int booked;
 
@@ -10,6 +8,11 @@ public class Concert extends Event implements Comparable<Concert> {
         super(name, date, venue);
         this.seats = seats;
         this.booked = 0;
+    }
+
+    @Override
+    public void bookTickets() {
+        decreaseSeatCount();
     }
 
     @Override

@@ -1,5 +1,3 @@
-package ConcertSystem;
-
 public interface Bookable {
 
     /**

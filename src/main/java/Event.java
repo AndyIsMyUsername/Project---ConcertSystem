@@ -1,5 +1,3 @@
-package ConcertSystem;
-
 import java.time.LocalDate;
 
 public abstract class Event {

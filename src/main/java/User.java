@@ -1,4 +1,4 @@
-package ConcertSystem;
+import java.util.List;
 
 public abstract class User {
     private String id;
@@ -12,5 +12,5 @@ public abstract class User {
     /**
      * abstract method allowing for both admin and customer to view events
      */
-    public abstract void viewEvents();
+    public abstract void viewEvents(List<Concert> concerts);
 }
