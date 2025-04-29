@@ -9,5 +9,8 @@ public abstract class User {
         this.name = name;
     }
 
+    /**
+     * abstract method allowing for both admin and customer
+     */
     public abstract void viewEvents();
 }
