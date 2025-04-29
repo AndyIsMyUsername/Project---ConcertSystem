@@ -1,7 +1,13 @@
 package ConcertSystem;
 
-public class User {
-    public static void main(String[] args) {
-        System.out.println("hello world");
+public abstract class User {
+    private String id;
+    private String name;
+
+    public User(String id, String name) {
+        this.id = id;
+        this.name = name;
     }
+
+    public abstract void viewEvents();
 }
