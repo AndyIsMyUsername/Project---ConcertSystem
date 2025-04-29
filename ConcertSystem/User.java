@@ -10,7 +10,7 @@ public abstract class User {
     }
 
     /**
-     * abstract method allowing for both admin and customer
+     * abstract method allowing for both admin and customer to view events
      */
     public abstract void viewEvents();
 }
