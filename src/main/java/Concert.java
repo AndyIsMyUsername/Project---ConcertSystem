@@ -1,4 +1,5 @@
 import java.time.LocalDate;
+import java.util.Comparator;
 
 public class Concert extends Event implements Bookable, Comparable<Concert> {
     private int seats;
@@ -56,5 +57,13 @@ public class Concert extends Event implements Bookable, Comparable<Concert> {
 
     public void setBooked(int booked) {
         this.booked = booked;
+    }
+}
+
+
+class PopularityComparator implements Comparator<Concert> {
+    @Override
+    public int compare(Concert o1, Concert o2) {
+        return Integer.compare(o2.getBooked(), o1.getBooked());
     }
 }

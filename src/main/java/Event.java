@@ -11,8 +11,15 @@ public abstract class Event {
         this.venue = venue;
     }
 
+    /**
+     * available seats
+     * @return number of available seats
+     */
     public abstract int availableSeats();
 
+    /**
+     * by booking a seat, automatically decrease seat available by one
+     */
     public abstract void decreaseSeatCount();
 
     public String getName() {
