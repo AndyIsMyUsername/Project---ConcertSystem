@@ -82,11 +82,36 @@ public class ConcertBookingSystem {
     }
 
     private static void addConcert(Admin admin) {
+        System.out.println("Enter concert name : ");
+        String name = scanner.nextLine();
+        System.out.println("Enter date : ");
+        LocalDate date = LocalDate.parse(scanner.nextLine());
+        System.out.println("Enter venue : ");
+        String venue = scanner.nextLine();
+        System.out.println("Number of seats : ");
+        int seats = scanner.nextInt();
+        scanner.nextLine();
 
+        Concert concert = new Concert(name, date ,venue, seats);
+        admin.addConcert(concerts, concert);
+        System.out.println("Concert Added.");
     }
 
     private static void removeConcert(Admin admin) {
+        System.out.println("Available Concerts : ");
+        concerts.forEach(c -> System.out.println((concerts.indexOf(c) + 1) + ". " + c.getName()));
 
+        System.out.println("Select one that you want to remove : ");
+        int idx = scanner.nextInt() -1;
+        scanner.nextLine();
+
+        if (idx >= 0 && idx < concerts.size()) {
+            Concert concert = concerts.get(idx);
+            admin.removeConcert(concerts, concert);
+            System.out.println("Concert removed successfully.");
+        } else {
+            System.out.println("Invalid please try again.");
+        }
     }
 
     private static void customerMenu() {
@@ -127,10 +152,53 @@ public class ConcertBookingSystem {
     }
 
     private static void bookConcert(Customer customer) {
+        List<Concert> availableConcerts = concerts.stream()
+                .filter(c -> c.availableSeats() > 0 && !c.isCancelled())
+                .collect(Collectors.toList());
 
+        if (availableConcerts.isEmpty()) {
+            System.out.println("No concerts available for booking.");
+            return;
+        }
+
+        System.out.println("Available concerts: ");
+        for (int i = 0; i < availableConcerts.size(); i++ ) {
+            Concert c = availableConcerts.get(i);
+            System.out.println((i+1) + ". " + c.getName() + " (" + c.availableSeats() + " seats available)");
+        }
+
+        System.out.println("Select concert to book : ");
+        int idx = scanner.nextInt() - 1;
+        scanner.nextLine();
+
+        if (idx >= 0 && idx < availableConcerts.size()) {
+            Concert selected = availableConcerts.get(idx);
+            customer.bookConcerts(selected);
+        } else {
+            System.out.println("Invalid selection");
+        }
     }
 
     private static void cancelBooking(Customer customer) {
+        if (customer.getBookedConcerts().isEmpty()) {
+            System.out.println("You have no bookings to cancel. ");
+            return;
+        }
 
+        System.out.println("Your bookings : ");
+        List<Concert> bookings = customer.getBookedConcerts();
+        for (int i = 0; i < bookings.size(); i++) {
+            System.out.println((i + 1) + ". " + bookings.get(i).getName());
+        }
+
+        System.out.println("Select booking to cancel");
+        int idx = scanner.nextInt() - 1;
+        scanner.nextLine();
+
+        if (idx >= 0 && idx < bookings.size()) {
+            customer.cancelBooking(bookings.get(idx));
+        } else {
+            System.out.println("Invalid selection");
+        }
     }
 }

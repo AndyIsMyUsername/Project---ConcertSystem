@@ -21,7 +21,7 @@ public class Admin extends User{
      * @param concerts list of concerts
      * @param concert concert to be removed
      */
-    public void RemoveConcert(List<Concert> concerts, Concert concert) {
+    public void removeConcert(List<Concert> concerts, Concert concert) {
         concerts.remove(concert);
     }
 
