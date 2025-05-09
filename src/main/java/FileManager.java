@@ -26,7 +26,7 @@ public class FileManager {
                 concerts.add(new Concert(name,date,venue,seats));
             }
         } catch (IOException e) {
-            throw new RuntimeException();
+            throw new RuntimeException("Failed to read concerts file.");
         }
         return concerts;
     }
@@ -39,10 +39,10 @@ public class FileManager {
     public static void writeConcertsToFile(List<Concert> concerts, String path) {
         try (FileWriter fw = new FileWriter(path)) {
             for (Concert concert : concerts) {
-                fw.write("Concert Name : " +  concert.getName() + ",");
-                fw.write("Date : " + concert.getDate() + ",");
-                fw.write("Get venue : " + concert.getVenue() + ",");
-                fw.write("Seats Available : " + concert.getSeats() + "," + "\n");
+                fw.write(concert.getName() + ",");
+                fw.write(concert.getDate() + ",");
+                fw.write(concert.getVenue() + ",");
+                fw.write(concert.getSeats() + "\n");
             }
         } catch (IOException e) {
             e.printStackTrace();

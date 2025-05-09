@@ -25,6 +25,17 @@ public class Admin extends User{
         concerts.remove(concert);
     }
 
+    @Override
+    public void viewEvents(List<Concert> concerts) {
+        System.out.println("\nAll Concerts (" + concerts.size() + "):");
+        concerts.forEach(c -> {
+            System.out.println("- " + c.getName() +
+                    " | Date: " + c.getDate() +
+                    " | Venue: " + c.getVenue() +
+                    " | Booked: " + c.getBooked() + "/" + c.getSeats());
+        });
+    }
+
     /**
      * view all bookings
      * @param concerts list of concerts
@@ -33,10 +44,5 @@ public class Admin extends User{
         for (Concert concert : concerts) {
             System.out.println(concert.getName() + " - Booked " + concert.getBooked() + "/"  + concert.getSeats());
         }
-    }
-
-    @Override
-    public void viewEvents(List<Concert> concerts) {
-        concerts.forEach(System.out :: println);
     }
 }

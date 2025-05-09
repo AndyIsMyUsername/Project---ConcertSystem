@@ -13,34 +13,25 @@ public class Concert extends Event implements Bookable, Comparable<Concert> {
 
     @Override
     public void bookTickets() {
-       if (availableSeats() > 0) {
-           booked++;
+       if (availableSeats() <= 0) {
+           throw new IllegalStateException("No available seats for : " + name);
        }
-    }
-
-    @Override
-    public int availableSeats() {
-        if(isCancelled() || status == EventStatus.POSTPONED) {
-            return 0;
-        }
-        return seats - booked;
-    }
-
-    @Override
-    public void decreaseSeatCount() {
-        if (availableSeats() <= 0) {
-            status = EventStatus.SOLD_OUT;
-            throw new IllegalStateException("Event is " + status);
-        }
-        booked++;
-        if (availableSeats() == 0 ) {
-            status = EventStatus.SOLD_OUT;
-        }
+       booked++;
     }
 
     @Override
     public int compareTo(Concert o) {
         return this.date.compareTo(o.date);
+    }
+
+    @Override
+    public int availableSeats() {
+        return seats - booked;
+    }
+
+    @Override
+    public void decreaseSeatCount() {
+        booked++;
     }
 
     @Override

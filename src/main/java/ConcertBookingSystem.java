@@ -84,7 +84,7 @@ public class ConcertBookingSystem {
     private static void addConcert(Admin admin) {
         System.out.println("Enter concert name : ");
         String name = scanner.nextLine();
-        System.out.println("Enter date : ");
+        System.out.println("Enter date (yyyy-mm-dd) : ");
         LocalDate date = LocalDate.parse(scanner.nextLine());
         System.out.println("Enter venue : ");
         String venue = scanner.nextLine();
@@ -130,7 +130,7 @@ public class ConcertBookingSystem {
             switch (choice) {
                 case 1:
                     List<Concert> availableConcerts = concerts.stream()
-                            .filter(c -> c.availableSeats() > 0 && !c.isCancelled())
+                            .filter(c -> c.availableSeats() > 0)
                             .collect(Collectors.toList());
                     customer.viewEvents(availableConcerts);
                     break;
@@ -153,7 +153,7 @@ public class ConcertBookingSystem {
 
     private static void bookConcert(Customer customer) {
         List<Concert> availableConcerts = concerts.stream()
-                .filter(c -> c.availableSeats() > 0 && !c.isCancelled())
+                .filter(c -> c.availableSeats() > 0)
                 .collect(Collectors.toList());
 
         if (availableConcerts.isEmpty()) {

@@ -4,18 +4,13 @@ public abstract class Event {
     protected String name;
     protected LocalDate date;
     protected String venue;
-    protected EventStatus status;
 
     public Event(String name, LocalDate date, String venue) {
         this.name = name;
         this.date = date;
         this.venue = venue;
-        this.status = EventStatus.ACTIVE;
     }
 
-    public enum EventStatus {
-        ACTIVE, CANCELLED, SOLD_OUT, POSTPONED
-    }
 
     /**
      * available seats
@@ -28,10 +23,6 @@ public abstract class Event {
      */
     public abstract void decreaseSeatCount();
 
-    public boolean isCancelled() {
-        return status == EventStatus.CANCELLED;
-    }
-
 
     @Override
     public String toString() {
@@ -39,17 +30,10 @@ public abstract class Event {
                 "name='" + name + '\'' +
                 ", date=" + date +
                 ", venue='" + venue + '\'' +
-                ", status=" + status +
                 '}';
     }
 
-    public EventStatus getStatus() {
-        return status;
-    }
 
-    public void setStatus(EventStatus status) {
-        this.status = status;
-    }
 
     public String getName() {
         return name;

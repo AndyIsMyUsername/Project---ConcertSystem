@@ -1,4 +1,5 @@
 import java.util.List;
+import java.util.stream.Collectors;
 
 public abstract class User {
     private String id;
@@ -12,7 +13,15 @@ public abstract class User {
     /**
      * abstract method allowing for both admin and customer to view events
      */
-    public abstract void viewEvents(List<Concert> concerts);
+    public void viewEvents(List<Concert> concerts) {
+        System.out.println("All events: ");
+        concerts.forEach(c-> {
+            System.out.println("- " + c.getName() +
+                    " | Date: " + c.getDate() +
+                    " | Venue: " + c.getVenue() +
+                    " | Available Seats: " + c.availableSeats());
+        });
+    }
 
     public String getId() {
         return id;

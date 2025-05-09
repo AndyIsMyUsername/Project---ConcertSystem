@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Customer extends User{
     private List<Concert> bookedConcerts = new ArrayList<>();
@@ -16,7 +17,7 @@ public class Customer extends User{
         if(concert.availableSeats() > 0) {
             concert.bookTickets();
             bookedConcerts.add(concert);
-            System.out.println("Successfully booked" + concert.getName());
+            System.out.println("Successfully booked " + concert.getName());
         } else {
             System.out.println("No available seats for" + concert.getName());
         }
@@ -29,8 +30,7 @@ public class Customer extends User{
     public void cancelBooking(Concert concert) {
         if (bookedConcerts.contains(concert)) {
             bookedConcerts.remove(concert);
-            concert.setSeats(concert.getSeats() + 1);
-            concert.setBooked(concert.getSeats() - 1);
+            concert.setBooked(concert.getBooked() - 1);
             System.out.println("Booking canceled for " + concert.getName());
         } else {
             System.out.println("You don't have booking for " + concert.getName());
@@ -39,8 +39,17 @@ public class Customer extends User{
 
     @Override
     public void viewEvents(List<Concert> concerts) {
-        System.out.println("Available concerts: ");
-        concerts.forEach(System.out::println);
+        List<Concert> available = concerts.stream()
+                .filter(c -> c.availableSeats() > 0)
+                .collect(Collectors.toList());
+
+        System.out.println("Available Concerts (" + available.size() + "):");
+        available.forEach(c -> {
+            System.out.println("- " + c.getName() +
+                    " | Date: " + c.getDate() +
+                    " | Venue: " + c.getVenue() +
+                    " | Available Seats: " + c.availableSeats());
+        });
     }
 
     public void viewMyBookings() {
