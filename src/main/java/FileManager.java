@@ -23,6 +23,8 @@ public class FileManager {
                 LocalDate date = LocalDate.parse(parts[1]);
                 String venue = parts[2];
                 int seats = Integer.parseInt(parts[3]);
+                Concert concert = new Concert(name,date,venue,seats);
+                concert.setBooked(concert.getBooked());
                 concerts.add(new Concert(name,date,venue,seats));
             }
         } catch (IOException e) {

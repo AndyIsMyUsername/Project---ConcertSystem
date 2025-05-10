@@ -13,37 +13,41 @@ public class ConcertBookingSystem {
 
     public static void main(String[] args) {
 
-        try {
-            concerts = FileManager.readConcerts(CONCERTS_FILE);
-        } catch (RuntimeException e) {
-            System.out.println("Error loading concerts. Starting with empty list.");
-            concerts = new ArrayList<>();
-        }
+        while (true) {
+            try {
+                concerts = FileManager.readConcerts(CONCERTS_FILE);
+            } catch (RuntimeException e) {
+                System.out.println("Error loading concerts. Starting with empty list.");
+                concerts = new ArrayList<>();
+            }
 
-        System.out.println("Booking System");
-        System.out.println("1. Admin Login");
-        System.out.println("2. Customer Login");
-        System.out.print("Select role: ");
-        int choice = scanner.nextInt();
-        scanner.nextLine();
+            System.out.println("Booking System");
+            System.out.println("1. Admin Login");
+            System.out.println("2. Customer Login");
+            System.out.print("Select role: ");
+            int choice = scanner.nextInt();
+            scanner.nextLine();
 
-        System.out.print("Enter your ID: ");
-        String id = scanner.nextLine();
-        System.out.print("Enter your name: ");
-        String name = scanner.nextLine();
+            System.out.print("Enter your ID: ");
+            String id = scanner.nextLine();
+            System.out.print("Enter your name: ");
+            String name = scanner.nextLine();
 
-        if (choice == 1) {
-            currentUser = new Admin(id, name);
-            adminMenu();
-        } else {
-            currentUser = new Customer(id, name);
-            customerMenu();
-        }
+            if (choice == 1) {
+                currentUser = new Admin(id, name);
+                adminMenu();
+            } else if (choice == 2) {
+                currentUser = new Customer(id, name);
+                customerMenu();
+            } else {
+                System.out.println("Invalid number try again.");
+            }
 
-        try {
-            FileManager.writeConcertsToFile(concerts, CONCERTS_FILE);
-        } catch (Exception e) {
-            System.out.println("Error saving concerts data.");
+            try {
+                FileManager.writeConcertsToFile(concerts, CONCERTS_FILE);
+            } catch (Exception e) {
+                System.out.println("Error saving concerts data.");
+            }
         }
     }
 

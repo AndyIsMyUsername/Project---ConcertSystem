@@ -3,7 +3,7 @@ import java.util.Comparator;
 
 public class Concert extends Event implements Bookable, Comparable<Concert> {
     private int seats;
-    private int booked;
+    public int booked;
 
     public Concert(String name, LocalDate date, String venue, int seats) {
         super(name, date, venue);
@@ -31,7 +31,7 @@ public class Concert extends Event implements Bookable, Comparable<Concert> {
 
     @Override
     public void decreaseSeatCount() {
-        booked++;
+        bookTickets();
     }
 
     @Override
