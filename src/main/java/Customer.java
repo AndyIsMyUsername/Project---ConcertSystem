@@ -37,6 +37,10 @@ public class Customer extends User{
         }
     }
 
+    /**
+     * view events as customer
+     * @param concerts available
+     */
     @Override
     public void viewEvents(List<Concert> concerts) {
         List<Concert> available = concerts.stream()
@@ -52,6 +56,9 @@ public class Customer extends User{
         });
     }
 
+    /**
+     * lets user see his own bookings
+     */
     public void viewMyBookings() {
         System.out.println("Your bookings: ");
         if (bookedConcerts.isEmpty()) {

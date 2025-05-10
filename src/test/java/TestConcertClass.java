@@ -133,7 +133,6 @@ class ConcertBookingSystemTest {
     }
 
     // User class tests
-
     @Test
     void testUserViewEvents() {
         concerts.add(concert1);

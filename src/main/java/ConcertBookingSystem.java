@@ -12,7 +12,6 @@ public class ConcertBookingSystem {
     private static User currentUser;
 
     public static void main(String[] args) {
-
         while (true) {
             try {
                 concerts = FileManager.readConcerts(CONCERTS_FILE);
@@ -51,6 +50,9 @@ public class ConcertBookingSystem {
         }
     }
 
+    /**
+     * menu for admin
+     */
     private static void adminMenu() {
         Admin admin = (Admin) currentUser;
         while (true) {
@@ -85,6 +87,10 @@ public class ConcertBookingSystem {
         }
     }
 
+    /**
+     * add a concert
+     * @param admin admin have access to it
+     */
     private static void addConcert(Admin admin) {
         System.out.println("Enter concert name : ");
         String name = scanner.nextLine();
@@ -101,6 +107,10 @@ public class ConcertBookingSystem {
         System.out.println("Concert Added.");
     }
 
+    /**
+     * remove concert
+     * @param admin can remove concert from system
+     */
     private static void removeConcert(Admin admin) {
         System.out.println("Available Concerts : ");
         concerts.forEach(c -> System.out.println((concerts.indexOf(c) + 1) + ". " + c.getName()));
@@ -118,6 +128,9 @@ public class ConcertBookingSystem {
         }
     }
 
+    /**
+     * customer menu
+     */
     private static void customerMenu() {
         Customer customer = (Customer) currentUser;
         while (true) {
@@ -155,6 +168,10 @@ public class ConcertBookingSystem {
         }
     }
 
+    /**
+     * book a concert
+     * @param customer can book a concert created by admin
+     */
     private static void bookConcert(Customer customer) {
         List<Concert> availableConcerts = concerts.stream()
                 .filter(c -> c.availableSeats() > 0)
@@ -183,6 +200,10 @@ public class ConcertBookingSystem {
         }
     }
 
+    /**
+     * Customer can cancel booking
+     * @param customer removes booking
+     */
     private static void cancelBooking(Customer customer) {
         if (customer.getBookedConcerts().isEmpty()) {
             System.out.println("You have no bookings to cancel. ");

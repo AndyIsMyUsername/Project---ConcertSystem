@@ -6,7 +6,6 @@ public class Admin extends User{
         super(id, name);
     }
 
-
     /**
      * add concert
      * @param concerts list of concerts
@@ -25,6 +24,10 @@ public class Admin extends User{
         concerts.remove(concert);
     }
 
+    /**
+     * view event as admin
+     * @param concerts shown
+     */
     @Override
     public void viewEvents(List<Concert> concerts) {
         System.out.println("\nAll Concerts (" + concerts.size() + "):");

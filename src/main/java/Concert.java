@@ -11,6 +11,9 @@ public class Concert extends Event implements Bookable, Comparable<Concert> {
         this.booked = 0;
     }
 
+    /**
+     * allows the system to book the tickets
+     */
     @Override
     public void bookTickets() {
        if (availableSeats() <= 0) {
@@ -19,16 +22,28 @@ public class Concert extends Event implements Bookable, Comparable<Concert> {
        booked++;
     }
 
+    /**
+     * sorts concerts by date
+     * @param o the object to be compared.
+     * @return
+     */
     @Override
     public int compareTo(Concert o) {
         return this.date.compareTo(o.date);
     }
 
+    /**
+     * calculates available seats
+     * @return seats available
+     */
     @Override
     public int availableSeats() {
         return seats - booked;
     }
 
+    /**
+     * decreases the seat count
+     */
     @Override
     public void decreaseSeatCount() {
         bookTickets();
