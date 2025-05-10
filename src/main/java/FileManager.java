@@ -23,9 +23,10 @@ public class FileManager {
                 LocalDate date = LocalDate.parse(parts[1]);
                 String venue = parts[2];
                 int seats = Integer.parseInt(parts[3]);
+                int booked = parts.length > 4 ? Integer.parseInt(parts[4]) : 0;
                 Concert concert = new Concert(name,date,venue,seats);
-                concert.setBooked(concert.getBooked());
-                concerts.add(new Concert(name,date,venue,seats));
+                concert.setBooked(booked);
+                concerts.add(concert);
             }
         } catch (IOException e) {
             throw new RuntimeException("Failed to read concerts file.");
@@ -44,7 +45,8 @@ public class FileManager {
                 fw.write(concert.getName() + ",");
                 fw.write(concert.getDate() + ",");
                 fw.write(concert.getVenue() + ",");
-                fw.write(concert.getSeats() + "\n");
+                fw.write(concert.getSeats() + ",");
+                fw.write(concert.getBooked() + "\n");
             }
         } catch (IOException e) {
             e.printStackTrace();
